@@ -1,2 +1,4 @@
-# JewelSales
-使用Eclipse，maven，Spring，SpringMVC，mybatis搭建的项目
+
+# SaleSystem
+A online selling System Using Spring,SpringMVC,Mybatis ,bootstrap,maven and so on.
+

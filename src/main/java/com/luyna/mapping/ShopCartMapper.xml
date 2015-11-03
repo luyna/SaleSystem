@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.luyna.dao.ShopCartMapper">
+	<resultMap id="BaseResultMap" type="com.luyna.pojo.ShopCart">
+		<id column="userName" jdbcType="CHAR" property="username" />
+		<id column="styleNo" jdbcType="CHAR" property="styleno" />
+		<result column="jewelNum" jdbcType="INTEGER" property="jewelnum" />
+		<result column="remark" jdbcType="CHAR" property="remark" />
+	</resultMap>
+
+	<resultMap id="ShopCartDetailMap" type="com.luyna.pojo.ShopCart">
+		<id column="userName" jdbcType="CHAR" property="username" />
+		<id column="styleNo" jdbcType="CHAR" property="styleno" />
+		<result column="jewelNum" jdbcType="INTEGER" property="jewelnum" />
+		<result column="remark" jdbcType="CHAR" property="remark" />
+		<association property="jewel" javaType="com.luyna.pojo.Jewel">
+			<id column="styleNo" property="styleno" jdbcType="CHAR" />
+			<result column="typeNo" property="typeno" jdbcType="INTEGER" />
+			<result column="jewelName" property="jewelname" jdbcType="CHAR" />
+			<result column="weight" property="weight" jdbcType="REAL" />
+			<result column="fineness" property="fineness" jdbcType="CHAR" />
+			<result column="specification" property="specification"
+				jdbcType="CHAR" />
+			<result column="accessory" property="accessory" jdbcType="CHAR" />
+			<result column="accessoryPrice" property="accessoryprice"
+				jdbcType="REAL" />
+			<result column="suite" property="suite" jdbcType="CHAR" />
+			<result column="storage" property="storage" jdbcType="INTEGER" />
+			<result column="time" property="time" jdbcType="DATE" />
+			<result column="instruction" property="instruction" jdbcType="CHAR" />
+			<result column="remark" property="remark" jdbcType="CHAR" />
+		</association>
+	</resultMap>
+
+
+	<sql id="Base_Column_List">
+		userName, styleNo, jewelNum, remark
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="com.luyna.pojo.ShopCartKey"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from shopcart
+		where userName = #{username,jdbcType=CHAR}
+		and styleNo = #{styleno,jdbcType=CHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="com.luyna.pojo.ShopCartKey">
+		delete from shopcart
+		where userName = #{username,jdbcType=CHAR}
+		and styleNo = #{styleno,jdbcType=CHAR}
+	</delete>
+	<insert id="insert" parameterType="com.luyna.pojo.ShopCart">
+		insert into shopcart (userName, styleNo, jewelNum,
+		remark)
+		values (#{username,jdbcType=CHAR}, #{styleno,jdbcType=CHAR},
+		#{jewelnum,jdbcType=INTEGER},
+		#{remark,jdbcType=CHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.luyna.pojo.ShopCart">
+		insert into shopcart
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="username != null">
+				userName,
+			</if>
+			<if test="styleno != null">
+				styleNo,
+			</if>
+			<if test="jewelnum != null">
+				jewelNum,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="username != null">
+				#{username,jdbcType=CHAR},
+			</if>
+			<if test="styleno != null">
+				#{styleno,jdbcType=CHAR},
+			</if>
+			<if test="jewelnum != null">
+				#{jewelnum,jdbcType=INTEGER},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=CHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.luyna.pojo.ShopCart">
+		update shopcart
+		<set>
+			<if test="jewelnum != null">
+				jewelNum = #{jewelnum,jdbcType=INTEGER},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=CHAR},
+			</if>
+		</set>
+		where userName = #{username,jdbcType=CHAR}
+		and styleNo = #{styleno,jdbcType=CHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.luyna.pojo.ShopCart">
+		update shopcart
+		set jewelNum = #{jewelnum,jdbcType=INTEGER},
+		remark = #{remark,jdbcType=CHAR}
+		where userName = #{username,jdbcType=CHAR}
+		and styleNo = #{styleno,jdbcType=CHAR}
+	</update>
+
+	<select id="selectCartSum" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		select
+		COALESCE(sum(jewelNum),0)
+		from shopcart
+		where userName = #{username,jdbcType=CHAR}
+	</select>
+
+	<select id="selectByUserName" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from shopcart
+		where userName = #{username,jdbcType=CHAR}
+	</select>
+
+	<select id="selectShopCartDetail" parameterType="java.lang.String" 
+		resultMap="ShopCartDetailMap"> select userName, shopcart.styleNo, 
+		jewelNum, typeNo, jewelName, weight, fineness, specification, accessory, 
+		accessoryPrice, suite, storage, time, instruction, jewel.remark from shopcart 
+		left join jewel on shopcart.styleno=jewel.styleno 
+		where userName = #{username,jdbcType=CHAR}
+	</select> 
+	<!-- 批量更新购物车 -->
+	<!-- <update id="batchUpdate"  parameterType="com.luyna.pojo.ShopCart">              
+          <foreach collection="list" item="item" index="index" separator=";">
+            update shopcart               
+                <set>
+                  jewelNum = #{item.jewelnum}
+                </set>
+                where userName = #{item.username,jdbcType=CHAR}
+				and styleNo = #{item.styleno,jdbcType=CHAR}
+         </foreach>
+          
+    </update> -->
+    <delete id="deleteByStyleno" parameterType="java.lang.String">
+		delete from shopcart
+		where styleNo = #{styleno,jdbcType=CHAR}
+	</delete>
+    
+</mapper>

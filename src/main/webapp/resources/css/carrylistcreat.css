@@ -1,0 +1,99 @@
+#addpicture{
+	display:inline-block;
+}
+#addequipment{
+	display:inline-block;
+}
+#carrycreat li{
+	list-style-type:none;
+	width:440px;
+}
+#carrycontain{
+	background-color:#FFFFFF;
+	width:1180px;
+	margin:100px auto;
+	position:relative;
+}
+.containlist{
+	margin:0 auto;
+	width:1180px;
+}
+.typeselect{
+	width:630px;
+	margin:0px auto;
+	padding-top:10px;
+}
+.typeselect .from-group{
+	/*width:180px;*/
+}
+.detailtype{
+	margin-left:10px;
+}
+#detailkind{
+	width:300px;
+}
+.searchinformation{	
+	margin:5px  0 0 0;
+}
+#searchequipmentname{
+	
+}
+.searchcountry{
+	/*margin-left:50px;*/
+}
+.resultlist{
+	float:left;
+}
+.carrylist{
+	float:left;
+}
+.listtittle{
+	font-weight: bold;
+	font-size:larger;
+	text-align:center;
+	margin:3px 0px;
+}
+.equipmentlistshow{
+	width:590px;
+	height:430px;
+	margin-bottom:20px;
+	overflow:auto; 
+	position: relative;
+}
+#searchcountry{
+	width:155px;
+}
+.containlist .table{
+	margin:0 auto;
+	width:95%;
+	
+}
+.containlist .table tbody tr td,.containlist .table tbody tr th{
+	padding:0px;
+	text-align:center;
+	border: 1px solid #888;
+	height:25px;
+}
+.equipmentlistshow table .equipmentname{
+	width:300px;
+}
+.equipmentlistshow table .equipmentnumber{
+	width:60px;
+}
+.equipmentlistshow table .operation{
+	width:70px;
+}
+.equipmentlistshow table input{
+	height:21px;
+	width:40px;
+	padding:0px;
+	margin:2px auto;
+	 text-align:center;
+}
+#Paginationcarrylist{
+	font-size:100%;
+	margin:0px;
+}
+#Paginationcarrylist .pagination{
+	margin:0px;
+}

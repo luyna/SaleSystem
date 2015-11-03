@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.luyna.dao.JewelMapper" >
+  <resultMap id="BaseResultMap" type="com.luyna.pojo.Jewel" >
+    <id column="styleNo" property="styleno" jdbcType="CHAR" />
+    <result column="typeNo" property="typeno" jdbcType="INTEGER" />
+    <result column="jewelName" property="jewelname" jdbcType="CHAR" />
+    <result column="weight" property="weight" jdbcType="REAL" />
+    <result column="fineness" property="fineness" jdbcType="CHAR" />
+    <result column="specification" property="specification" jdbcType="CHAR" />
+    <result column="accessory" property="accessory" jdbcType="CHAR" />
+    <result column="accessoryPrice" property="accessoryprice" jdbcType="REAL" />
+    <result column="suite" property="suite" jdbcType="CHAR" />
+    <result column="storage" property="storage" jdbcType="INTEGER" />
+    <result column="time" property="time" jdbcType="DATE" />
+    <result column="instruction" property="instruction" jdbcType="CHAR" />
+    <result column="remark" property="remark" jdbcType="CHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+  </resultMap>
+  
+  <resultMap id="JewelAndTypeMap" type="com.luyna.pojo.Jewel" >
+    <id column="styleNo" property="styleno" jdbcType="CHAR" />
+    <result column="typeNo" property="typeno" jdbcType="INTEGER" />
+    <result column="jewelName" property="jewelname" jdbcType="CHAR" />
+    <result column="weight" property="weight" jdbcType="REAL" />
+    <result column="fineness" property="fineness" jdbcType="CHAR" />
+    <result column="specification" property="specification" jdbcType="CHAR" />
+    <result column="accessory" property="accessory" jdbcType="CHAR" />
+    <result column="accessoryPrice" property="accessoryprice" jdbcType="REAL" />
+    <result column="suite" property="suite" jdbcType="CHAR" />
+    <result column="storage" property="storage" jdbcType="INTEGER" />
+    <result column="time" property="time" jdbcType="DATE" />
+    <result column="instruction" property="instruction" jdbcType="CHAR" />
+    <result column="remark" property="remark" jdbcType="CHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <association property="subtype" javaType="com.luyna.pojo.JewelSubType">
+		<result column="subTypeId" property="subtypeid" jdbcType="CHAR" />
+    	<result column="subTypeName" property="subtypename" jdbcType="CHAR" />
+	</association>
+    
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    styleNo, typeNo, jewelName, weight, fineness, specification, accessory, accessoryPrice, 
+    suite, storage, time, instruction, remark,status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from jewel
+    where styleNo = #{styleno,jdbcType=CHAR} 
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from jewel
+    where styleNo = #{styleno,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.luyna.pojo.Jewel" >
+    insert into jewel (styleNo, typeNo, jewelName, 
+      weight, fineness, specification, 
+      accessory, accessoryPrice, suite, 
+      storage, time, instruction, 
+      remark,status)
+    values (#{styleno,jdbcType=CHAR}, #{typeno,jdbcType=INTEGER}, #{jewelname,jdbcType=CHAR}, 
+      #{weight,jdbcType=REAL}, #{fineness,jdbcType=CHAR}, #{specification,jdbcType=CHAR}, 
+      #{accessory,jdbcType=CHAR}, #{accessoryprice,jdbcType=REAL}, #{suite,jdbcType=CHAR}, 
+      #{storage,jdbcType=INTEGER}, #{time,jdbcType=DATE}, #{instruction,jdbcType=CHAR}, 
+      #{remark,jdbcType=CHAR},#{status,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.luyna.pojo.Jewel" >
+    insert into jewel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="styleno != null" >
+        styleNo,
+      </if>
+      <if test="typeno != null" >
+        typeNo,
+      </if>
+      <if test="jewelname != null" >
+        jewelName,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="fineness != null" >
+        fineness,
+      </if>
+      <if test="specification != null" >
+        specification,
+      </if>
+      <if test="accessory != null" >
+        accessory,
+      </if>
+      <if test="accessoryprice != null" >
+        accessoryPrice,
+      </if>
+      <if test="suite != null" >
+        suite,
+      </if>
+      <if test="storage != null" >
+        storage,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="instruction != null" >
+        instruction,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="styleno != null" >
+        #{styleno,jdbcType=CHAR},
+      </if>
+      <if test="typeno != null" >
+        #{typeno,jdbcType=INTEGER},
+      </if>
+      <if test="jewelname != null" >
+        #{jewelname,jdbcType=CHAR},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=REAL},
+      </if>
+      <if test="fineness != null" >
+        #{fineness,jdbcType=CHAR},
+      </if>
+      <if test="specification != null" >
+        #{specification,jdbcType=CHAR},
+      </if>
+      <if test="accessory != null" >
+        #{accessory,jdbcType=CHAR},
+      </if>
+      <if test="accessoryprice != null" >
+        #{accessoryprice,jdbcType=REAL},
+      </if>
+      <if test="suite != null" >
+        #{suite,jdbcType=CHAR},
+      </if>
+      <if test="storage != null" >
+        #{storage,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=DATE},
+      </if>
+      <if test="instruction != null" >
+        #{instruction,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=CHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.luyna.pojo.Jewel" >
+    update jewel
+    <set >
+      <if test="typeno != null" >
+        typeNo = #{typeno,jdbcType=INTEGER},
+      </if>
+      <if test="jewelname != null" >
+        jewelName = #{jewelname,jdbcType=CHAR},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=REAL},
+      </if>
+      <if test="fineness != null" >
+        fineness = #{fineness,jdbcType=CHAR},
+      </if>
+      <if test="specification != null" >
+        specification = #{specification,jdbcType=CHAR},
+      </if>
+      <if test="accessory != null" >
+        accessory = #{accessory,jdbcType=CHAR},
+      </if>
+      <if test="accessoryprice != null" >
+        accessoryPrice = #{accessoryprice,jdbcType=REAL},
+      </if>
+      <if test="suite != null" >
+        suite = #{suite,jdbcType=CHAR},
+      </if>
+      <if test="storage != null" >
+        storage = #{storage,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=DATE},
+      </if>
+      <if test="instruction != null" >
+        instruction = #{instruction,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=CHAR},
+      </if>
+       <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+    </set>
+    where styleNo = #{styleno,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.luyna.pojo.Jewel" >
+    update jewel
+    set typeNo = #{typeno,jdbcType=INTEGER},
+      jewelName = #{jewelname,jdbcType=CHAR},
+      weight = #{weight,jdbcType=REAL},
+      fineness = #{fineness,jdbcType=CHAR},
+      specification = #{specification,jdbcType=CHAR},
+      accessory = #{accessory,jdbcType=CHAR},
+      accessoryPrice = #{accessoryprice,jdbcType=REAL},
+      suite = #{suite,jdbcType=CHAR},
+      storage = #{storage,jdbcType=INTEGER},
+      time = #{time,jdbcType=DATE},
+      instruction = #{instruction,jdbcType=CHAR},
+      remark = #{remark,jdbcType=CHAR},
+      status = #{status,jdbcType=CHAR}
+    where styleNo = #{styleno,jdbcType=CHAR}
+  </update>
+  
+  <select id="selectByType" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from jewel
+    where typeNo = #{typeno} and status='1'
+  </select>
+  
+  <select id="selectByTypePrefix" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from jewel
+    where typeNo like concat(#{typeno},'%') and status='1'
+  </select>
+  
+  <select id="selectByStylenoWeight" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select 
+    <include refid="Base_Column_List" />
+    from jewel
+    where status='1' and styleNo like concat(concat('%',#{styleno}),'%') 
+    and weight between #{minWeight} and #{maxWeight}
+  </select>
+  
+  <select id="selectByStyleNo" resultMap="JewelAndTypeMap" parameterType="java.lang.String">
+    select 
+    <include refid="Base_Column_List" />,subTypeName
+    from jewel left join jewelsubtype on jewel.typeNo=jewelsubtype.subTypeId
+    where styleNo = #{styleno,jdbcType=CHAR} 
+  </select>
+  
+  <select id="selectByFuzzyStyleNo" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select 
+    <include refid="Base_Column_List" />
+    from jewel
+    where styleNo like concat(concat('%',#{styleno}),'%') and status='1'
+  </select>
+  
+  <delete id="deleteByStylenoLogic" parameterType="java.lang.String" >
+    update jewel
+    set status = '0'
+    where styleNo = #{styleno,jdbcType=CHAR}
+  </delete>
+  
+</mapper>

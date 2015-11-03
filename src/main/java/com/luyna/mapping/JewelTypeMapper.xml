@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.luyna.dao.JewelTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.luyna.pojo.JewelType" >
+    <result column="typeId" property="typeid" jdbcType="CHAR" />
+    <result column="typeName" property="typename" jdbcType="CHAR" />
+  </resultMap>
+  
+  <insert id="insert" parameterType="com.luyna.pojo.JewelType" >
+    insert into jeweltype (typeId, typeName)
+    values (#{typeid,jdbcType=CHAR}, #{typename,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.luyna.pojo.JewelType" >
+    insert into jeweltype
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="typeid != null" >
+        typeId,
+      </if>
+      <if test="typename != null" >
+        typeName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="typeid != null" >
+        #{typeid,jdbcType=CHAR},
+      </if>
+      <if test="typename != null" >
+        #{typename,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <select id="selectAll" resultMap="BaseResultMap">
+    select typeId,typeName
+    from jeweltype
+  </select>
+  
+  <select id="selectByPrefix" resultMap="BaseResultMap">
+    select typeId,typeName
+    from jeweltype
+    where typeId like concat(#{prefix},'%')
+  </select>
+  <select id="selectMaxId" resultType="java.lang.Integer" parameterType="java.lang.String">
+    select coalesce(max(typeId),0)
+    from jeweltype
+    where typeId like concat(#{prefix},'%')
+  </select>
+  <update id="updateTypename" parameterType="com.luyna.pojo.JewelType" >
+    update jeweltype
+    set typeName =  #{typename,jdbcType=CHAR}      
+    where typeId =  #{typeid,jdbcType=CHAR}
+  </update>
+  <delete id="deleteByTypeid" parameterType="java.lang.String" >
+    delete from jeweltype
+    where typeId = #{typeid,jdbcType=CHAR}
+  </delete>
+</mapper>

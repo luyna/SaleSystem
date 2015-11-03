@@ -1,0 +1,39 @@
+body,h1,h2,h3,h4,h5,h6,p,ul,ol,li,form,img,dl,dt,dd,table,th,td,blockquote,fieldset,div,strong,label,em{margin:0;padding:0;border:0;}
+ul,ol,li{list-style:none;}
+input,button{margin:0;font-size:12px;vertical-align:middle;}
+body{font-size:12px;font-family:Arial, Helvetica, sans-serif; color:#333; margin:0 auto; }
+table{border-collapse:collapse;border-spacing:0;}
+
+a{color:#333;text-decoration:none;}
+a:hover{color:#c00; text-decoration:underline;}
+em,i{ font-style:normal;}
+b{ font-weight:normal;}
+h1,h2,h3,h4{ font-size:14px;}
+h5{ font-size:12px;}
+h6{ font-size:12px; font-weight:normal;}
+
+.box-163css{ width:100%; margin:20px auto;}
+.list_img{ width:800px;}
+.list_img li{ padding-top:12px; background:url(../images/bg03.gif) repeat-x; text-align:center; height:210px; width:178px; border:1px solid #c7c7c7; float:left; display:inline; margin-left:15px;}
+.list_img .ppic{ margin-bottom:7px;}
+.list_img li a{ display:block;}
+.list_img li .a1{ text-decoration:underline; color:#049; font-weight:bold;}
+.list_img li strong{ font-size:14px; color:#049; margin:8px 0; display:block;}
+.list_img li .a2{ width:104px; margin:0 auto;}
+.db {  BACKGROUND-COLOR: white;margin-left:150px;width:800px; float:none; border:2px solid #6495ED; padding-bottom:10px; overflow:hidden;}
+.db1 {FLOAT: left; margin:0 -1px; background:url(../images/bg01.png) repeat; WIDTH: 100%; overflow:hidden; height:30px; line-height:30px;}
+.db11 { padding-left:27px;FONT-WEIGHT: bold; FLOAT: left; COLOR: #049;}
+.db12 {FLOAT: right; WIDTH: 21px; PADDING-TOP: 6px; TEXT-ALIGN: left}
+.db2 {FLOAT: left; WIDTH: 157px; PADDING-TOP: 7px; border:1px dashed #cbd7e5;}
+.db2r {FLOAT: left; cursor:pointer; WIDTH: 157px; PADDING-TOP: 7px;border-bottom:1px dashed #cbd7e5;border-right:1px dashed #cbd7e5;}
+.db3 { position:relative; padding-bottom:6px; WIDTH: 150px; height:130px;  margin-left:3px;}
+.db31 {FLOAT: left; text-align:center; WIDTH:150px; TEXT-ALIGN: left}
+.db31 a{ margin:0 auto; display:block; width:33px;margin:0 auto;}
+.db31 img{ height:90px; width:130px; padding-left:5px;}
+.db32 { width:100%; padding:5px 0; text-align:center;}
+.db32 A {COLOR: #0044dd; TEXT-DECORATION: none}
+.db33 { position:absolute; right:0; top:0; WIDTH: 16px; TEXT-ALIGN: left}
+.db4 {FLOAT: left; margin-bottom:10px; width:150px;PADDING-TOP: 20px; HEIGHT: 40px; BACKGROUND-COLOR: white; TEXT-ALIGN: center}
+.db4 a{background:url(../images/bg05.gif) no-repeat ; width:82px; height:29px; text-indent:-999em; display:block; outline:none;border:0;margin:0 auto;}
+.db5 {FONT-SIZE: 12px; padding-bottom:10px; float:left; PADDING-TOP: 30px;width:150px;COLOR: #0044dd; HEIGHT: 10px; BACKGROUND-COLOR: white; TEXT-ALIGN: center}
+.db5 a{background:url(../images/bg05.gif) no-repeat 0 -33px; width:82px; height:29px;margin:0 auto; text-indent:-999em; display:block;}

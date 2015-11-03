@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.luyna.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.luyna.pojo.User" >
+    <id column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="userName" property="username" jdbcType="CHAR" />
+    <result column="userRelname" property="userrelname" jdbcType="CHAR" />
+    <result column="address" property="address" jdbcType="CHAR" />
+    <result column="companyName" property="companyname" jdbcType="CHAR" />
+    <result column="password" property="password" jdbcType="CHAR" />
+    <result column="phoneNum" property="phonenum" jdbcType="CHAR" />
+    <result column="email" property="email" jdbcType="CHAR" />
+    <result column="regDate" property="regdate" jdbcType="DATE" />
+    <result column="status" property="status" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    userId, userName, userRelname, address, companyName, password, phoneNum, email, regDate,status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from users
+    where userId = #{userid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from users
+    where userId = #{userid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.luyna.pojo.User" >
+    insert into users (userId, userName, userRelname, 
+      address, companyName, password, 
+      phoneNum, email, regDate,status)
+    values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=CHAR}, #{userrelname,jdbcType=CHAR}, 
+      #{address,jdbcType=CHAR}, #{companyname,jdbcType=CHAR}, #{password,jdbcType=CHAR}, 
+      #{phonenum,jdbcType=CHAR}, #{email,jdbcType=CHAR}, #{regdate,jdbcType=DATE}, #{status,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.luyna.pojo.User" >
+    insert into users
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="username != null" >
+        userName,
+      </if>
+      <if test="userrelname != null" >
+        userRelname,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="companyname != null" >
+        companyName,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="phonenum != null" >
+        phoneNum,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="regdate != null" >
+        regDate,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=CHAR},
+      </if>
+      <if test="userrelname != null" >
+        #{userrelname,jdbcType=CHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=CHAR},
+      </if>
+      <if test="companyname != null" >
+        #{companyname,jdbcType=CHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=CHAR},
+      </if>
+      <if test="phonenum != null" >
+        #{phonenum,jdbcType=CHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=CHAR},
+      </if>
+      <if test="regdate != null" >
+        #{regdate,jdbcType=DATE},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.luyna.pojo.User" >
+    update users
+    <set >
+      <if test="username != null" >
+        userName = #{username,jdbcType=CHAR},
+      </if>
+      <if test="userrelname != null" >
+        userRelname = #{userrelname,jdbcType=CHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=CHAR},
+      </if>
+      <if test="companyname != null" >
+        companyName = #{companyname,jdbcType=CHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=CHAR},
+      </if>
+      <if test="phonenum != null" >
+        phoneNum = #{phonenum,jdbcType=CHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=CHAR},
+      </if>
+      <if test="regdate != null" >
+        regDate = #{regdate,jdbcType=DATE},
+      </if>
+     <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+    </set>
+    where userId = #{userid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.luyna.pojo.User" >
+    update users
+    set userName = #{username,jdbcType=CHAR},
+      userRelname = #{userrelname,jdbcType=CHAR},
+      address = #{address,jdbcType=CHAR},
+      companyName = #{companyname,jdbcType=CHAR},
+      password = #{password,jdbcType=CHAR},
+      phoneNum = #{phonenum,jdbcType=CHAR},
+      email = #{email,jdbcType=CHAR},
+      regDate = #{regdate,jdbcType=DATE},
+      status = #{status,jdbcType=CHAR}
+    where userId = #{userid,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectByUsername" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from users
+    where userName = #{username}
+  </select>
+  
+  <update id="updatePasswordByUsername" parameterType="com.luyna.pojo.User" >
+    update users
+    set password = #{password,jdbcType=CHAR}
+    where  userName = #{username,jdbcType=CHAR}
+  </update>
+  
+  <update id="updateUserInfo" parameterType="com.luyna.pojo.User" >
+    update users
+    set 
+      userRelname = #{userrelname,jdbcType=CHAR},
+      address = #{address,jdbcType=CHAR},
+      companyName = #{companyname,jdbcType=CHAR},
+      password = #{password,jdbcType=CHAR},
+      phoneNum = #{phonenum,jdbcType=CHAR},
+      email = #{email,jdbcType=CHAR},
+      regDate = #{regdate,jdbcType=DATE},
+      status = #{status,jdbcType=CHAR}
+    where  userName = #{username,jdbcType=CHAR}
+  </update>
+  
+  <select id="selectAllUnChecked" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from users
+    where status='0'
+  </select>
+  
+  <update id="updateUserStatus" parameterType="java.lang.String" >
+    update users
+    set status ='1'
+    where  userName = #{username,jdbcType=CHAR}
+  </update>
+  <delete id="deleteByUsername" parameterType="java.lang.String" >
+    update users
+    set  status = '2'
+    where userName = #{username,jdbcType=CHAR}
+  </delete>
+  
+  <select id="selectAllChecked" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from users
+    where status='1'
+  </select>
+  
+</mapper>

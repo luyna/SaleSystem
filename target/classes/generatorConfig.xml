@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration >
+  <!-- <context id="context1" >
+    <jdbcConnection driverClass="???" connectionURL="???" userId="???" password="???" />
+    <javaModelGenerator targetPackage="???" targetProject="???" />
+    <sqlMapGenerator targetPackage="???" targetProject="???" />
+    <javaClientGenerator targetPackage="???" targetProject="???" type="XMLMAPPER" />
+    <table schema="???" tableName="???" >
+      <columnOverride column="???" property="???" />
+    </table>
+  </context> -->
+  
+   <!-- <classPathEntry location="y:\\workspace\pojo\WebContent\WEB-INF\lib\ojdbc14.jar" 
+        /> -->
+    <classPathEntry
+        location="C:\usr\apache-tomcat-7.0.62\webapps\jewelSales\WEB-INF\lib\mysql-connector-java-5.1.35.jar" />
+    <context id="mysql" targetRuntime="MyBatis3">
+        <!-- 开启注释 -->
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>    
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->    
+            <property name="suppressAllComments" value="true"/>  
+        </commentGenerator>
+
+        <!-- 数据库连接 -->
+        <!-- connectionURL="jdbc:oracle:thin:@127.0.0.1:1521:orcl" userId="orcl" 
+            password="orcl"> -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+            connectionURL="jdbc:mysql://localhost:3306/jewelmanagesystem" userId="root"
+            password="">
+        </jdbcConnection>
+
+        <!--允许数值类型转换成不同类型,否则都映射为BigDecimal -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <!-- 模型文件 -->
+        <javaModelGenerator targetPackage="com.luyna.pojo"
+            targetProject="jewelSales/src/main/java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <!-- XML映射文件 -->
+        <sqlMapGenerator targetPackage="com.luyna.mapping"
+            targetProject="jewelSales/src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <!-- DAO文件(mapper接口) -->
+        <javaClientGenerator targetPackage="com.luyna.dao"
+            targetProject="jewelSales/src/main/java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <!-- 数据库表 -->
+       <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名 -->
+
+		 
+ 
+       <!--  <table tableName="shopcart" domainObjectName="ShopCart" 
+		enableCountByExample="false" enableUpdateByExample="false" 
+		enableDeleteByExample="false" enableSelectByExample="false" 
+		selectByExampleQueryId="false"></table> -->
+		<!-- <table tableName="collection" domainObjectName="MyCollection" 
+		enableCountByExample="false" enableUpdateByExample="false" 
+		enableDeleteByExample="false" enableSelectByExample="false" 
+		selectByExampleQueryId="false"></table> -->
+		<table tableName="branchcompany" domainObjectName="BranchCompany" 
+		enableCountByExample="false" enableUpdateByExample="false" 
+		enableDeleteByExample="false" enableSelectByExample="false" 
+		selectByExampleQueryId="false"></table>
+       <!--  <table tableName="users" domainObjectName="User" 
+		enableCountByExample="false" enableUpdateByExample="false" 
+		enableDeleteByExample="false" enableSelectByExample="false" 
+		selectByExampleQueryId="false"></table> 
+		
+		<table tableName="jewel" domainObjectName="Jewel" 
+		enableCountByExample="false" enableUpdateByExample="false" 
+		enableDeleteByExample="false" enableSelectByExample="false" 
+		selectByExampleQueryId="false"></table> 
+		
+		<table tableName="jewelorder" domainObjectName="JewelOrder" 
+		enableCountByExample="false" enableUpdateByExample="false" 
+		enableDeleteByExample="false" enableSelectByExample="false" 
+		selectByExampleQueryId="false"></table>
+		
+		<table tableName="jeweltype" domainObjectName="JewelType" 
+		enableCountByExample="false" enableUpdateByExample="false" 
+		enableDeleteByExample="false" enableSelectByExample="false" 
+		selectByExampleQueryId="false"></table>  
+		
+		<table tableName="jewelsubtype" domainObjectName="JewelSubType" 
+		enableCountByExample="false" enableUpdateByExample="false" 
+		enableDeleteByExample="false" enableSelectByExample="false" 
+		selectByExampleQueryId="false"></table> 
+		
+		<table tableName="manage" domainObjectName="Manage" 
+		enableCountByExample="false" enableUpdateByExample="false" 
+		enableDeleteByExample="false" enableSelectByExample="false" 
+		selectByExampleQueryId="false"></table> 
+		
+		<table tableName="orderitem" domainObjectName="OrderItem" 
+		enableCountByExample="false" enableUpdateByExample="false" 
+		enableDeleteByExample="false" enableSelectByExample="false" 
+		selectByExampleQueryId="false"></table> 
+		
+		<table tableName="picture" domainObjectName="Picture" 
+		enableCountByExample="false" enableUpdateByExample="false" 
+		enableDeleteByExample="false" enableSelectByExample="false" 
+		selectByExampleQueryId="false"></table>  -->
+
+    </context>
+</generatorConfiguration>

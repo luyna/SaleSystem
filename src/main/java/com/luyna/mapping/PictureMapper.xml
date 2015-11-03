@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.luyna.dao.PictureMapper" >
+  <resultMap id="BaseResultMap" type="com.luyna.pojo.Picture" >
+    <result column="styleNo" property="styleno" jdbcType="CHAR" />
+    <result column="picName" property="picname" jdbcType="CHAR" />
+    <result column="picSuffix" property="picsuffix" jdbcType="CHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.luyna.pojo.Picture" extends="BaseResultMap" >
+    <result column="picContent" property="piccontent" jdbcType="LONGVARBINARY" />
+  </resultMap>
+   <resultMap id="PictureMap" type="com.luyna.pojo.Picture" >
+    <result column="styleNo" property="styleno" jdbcType="CHAR" />
+    <result column="picName" property="picname" jdbcType="CHAR" />
+    <result column="picSuffix" property="picsuffix" jdbcType="CHAR" />
+    <result column="picContent" property="piccontent" jdbcType="LONGVARBINARY" />
+  </resultMap>
+  <sql id="Blob_Column_List" >
+    picContent
+  </sql>
+  <insert id="insert" parameterType="com.luyna.pojo.Picture" >
+    insert into picture (styleNo, picName, picSuffix, 
+      picContent)
+    values (#{styleno,jdbcType=CHAR}, #{picname,jdbcType=CHAR}, #{picsuffix,jdbcType=CHAR}, 
+      #{piccontent,jdbcType=LONGVARBINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="com.luyna.pojo.Picture" >
+    insert into picture
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="styleno != null" >
+        styleNo,
+      </if>
+      <if test="picname != null" >
+        picName,
+      </if>
+      <if test="picsuffix != null" >
+        picSuffix,
+      </if>
+      <if test="piccontent != null" >
+        picContent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="styleno != null" >
+        #{styleno,jdbcType=CHAR},
+      </if>
+      <if test="picname != null" >
+        #{picname,jdbcType=CHAR},
+      </if>
+      <if test="picsuffix != null" >
+        #{picsuffix,jdbcType=CHAR},
+      </if>
+      <if test="piccontent != null" >
+        #{piccontent,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  
+   <select id="selectByStyleno" resultMap="PictureMap" parameterType="java.lang.String" >
+    select styleNo, picName, picSuffix, picContent    
+    from picture
+    where styleNo = #{styleno,jdbcType=CHAR}
+  </select>
+  
+  <update id="updateByStyleno" parameterType="com.luyna.pojo.Picture" >
+    update picture
+    set picname= #{picname,jdbcType=CHAR}, 
+    	picsuffix=#{picsuffix,jdbcType=CHAR}, 
+        piccontent=#{piccontent,jdbcType=LONGVARBINARY}
+    where styleNo = #{styleno,jdbcType=CHAR}
+  </update>
+  <delete id="deleteByStyleno" parameterType="java.lang.String" >
+    delete from picture
+    where styleNo = #{styleno,jdbcType=CHAR}
+  </delete>
+  
+</mapper>

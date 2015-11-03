@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.luyna.dao.MyCollectionMapper" >
+  <resultMap id="BaseResultMap" type="com.luyna.pojo.MyCollectionKey" >
+    <id column="userName" property="username" jdbcType="CHAR" />
+    <id column="styleNo" property="styleno" jdbcType="CHAR" />
+  </resultMap>
+  
+  <resultMap id="CollectionDetailMap" type="com.luyna.pojo.MyCollection" >
+    <id column="userName" property="username" jdbcType="CHAR" />
+    <id column="styleNo" property="styleno" jdbcType="CHAR" />
+    <association property="jewel" javaType="com.luyna.pojo.Jewel">
+			<id column="styleNo" property="styleno" jdbcType="CHAR" />
+			<result column="typeNo" property="typeno" jdbcType="INTEGER" />
+			<result column="jewelName" property="jewelname" jdbcType="CHAR" />
+			<result column="weight" property="weight" jdbcType="REAL" />
+			<result column="fineness" property="fineness" jdbcType="CHAR" />
+			<result column="specification" property="specification"
+				jdbcType="CHAR" />
+			<result column="accessory" property="accessory" jdbcType="CHAR" />
+			<result column="accessoryPrice" property="accessoryprice"
+				jdbcType="REAL" />
+			<result column="suite" property="suite" jdbcType="CHAR" />
+			<result column="storage" property="storage" jdbcType="INTEGER" />
+			<result column="time" property="time" jdbcType="DATE" />
+			<result column="instruction" property="instruction" jdbcType="CHAR" />
+			<result column="remark" property="remark" jdbcType="CHAR" />
+	</association>
+  </resultMap>
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="com.luyna.pojo.MyCollectionKey" >
+    delete from collection
+    where userName = #{username,jdbcType=CHAR}
+      and styleNo = #{styleno,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.luyna.pojo.MyCollectionKey" >
+    insert into collection (userName, styleNo)
+    values (#{username,jdbcType=CHAR}, #{styleno,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.luyna.pojo.MyCollectionKey" >
+    insert into collection
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="username != null" >
+        userName,
+      </if>
+      <if test="styleno != null" >
+        styleNo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="username != null" >
+        #{username,jdbcType=CHAR},
+      </if>
+      <if test="styleno != null" >
+        #{styleno,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <select id="selectByPrimaryKey" parameterType="com.luyna.pojo.MyCollectionKey" resultMap="BaseResultMap">
+    select userName,styleNo
+    from collection
+    where userName = #{username,jdbcType=CHAR}
+      and styleNo = #{styleno,jdbcType=CHAR} 
+  </select>
+  
+  <select id="selectDetailByUsername" parameterType="java.lang.String" resultMap="CollectionDetailMap">
+    select userName,collection.styleNo, jewelName, weight, storage
+    from collection left join jewel on collection.styleNo=jewel.styleNo
+    where userName = #{username,jdbcType=CHAR} 
+  </select>
+  
+  <delete id="deleteByStyleno" parameterType="java.lang.String" >
+    delete from collection
+    where styleNo = #{styleno,jdbcType=CHAR}
+  </delete>
+  
+</mapper>

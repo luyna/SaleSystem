@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.luyna.dao.JewelOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.luyna.pojo.JewelOrder" >
+    <id column="orderId" property="orderid" jdbcType="CHAR" />
+    <result column="userName" property="username" jdbcType="CHAR" />
+    <result column="totalNum" property="totalnum" jdbcType="INTEGER" />
+    <result column="totalWeight" property="totalweight" jdbcType="REAL" />
+    <result column="accessoryPrice" property="accessoryprice" jdbcType="REAL" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="payType" property="paytype" jdbcType="CHAR" />
+    <result column="orderTime" property="ordertime" jdbcType="DATE" />
+    <result column="companyId" property="companyid" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    orderId, userName, totalNum, totalWeight, accessoryPrice, status, payType, orderTime,companyId,remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from jewelorder
+    where orderId = #{orderid,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from jewelorder
+    where orderId = #{orderid,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.luyna.pojo.JewelOrder" >
+    insert into jewelorder (orderId, userName, totalNum, 
+      totalWeight, accessoryPrice, status, 
+      payType, orderTime,companyId,remark)
+    values (#{orderid,jdbcType=CHAR}, #{username,jdbcType=CHAR}, #{totalnum,jdbcType=INTEGER}, 
+      #{totalweight,jdbcType=REAL}, #{accessoryprice,jdbcType=REAL}, #{status,jdbcType=CHAR}, 
+      #{paytype,jdbcType=CHAR}, #{ordertime,jdbcType=DATE},#{companyid,jdbcType=INTEGER},#{remark,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.luyna.pojo.JewelOrder" >
+    insert into jewelorder
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderid != null" >
+        orderId,
+      </if>
+      <if test="username != null" >
+        userName,
+      </if>
+      <if test="totalnum != null" >
+        totalNum,
+      </if>
+      <if test="totalweight != null" >
+        totalWeight,
+      </if>
+      <if test="accessoryprice != null" >
+        accessoryPrice,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="paytype != null" >
+        payType,
+      </if>
+      <if test="ordertime != null" >
+        orderTime,
+      </if>
+      <if test="companyid != null" >
+        companyId,
+      </if>
+       <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderid != null" >
+        #{orderid,jdbcType=CHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=CHAR},
+      </if>
+      <if test="totalnum != null" >
+        #{totalnum,jdbcType=INTEGER},
+      </if>
+      <if test="totalweight != null" >
+        #{totalweight,jdbcType=REAL},
+      </if>
+      <if test="accessoryprice != null" >
+        #{accessoryprice,jdbcType=REAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="paytype != null" >
+        #{paytype,jdbcType=CHAR},
+      </if>
+      <if test="ordertime != null" >
+        #{ordertime,jdbcType=DATE},
+      </if>
+      <if test="companyid != null" >
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.luyna.pojo.JewelOrder" >
+    update jewelorder
+    <set >
+      <if test="username != null" >
+        userName = #{username,jdbcType=CHAR},
+      </if>
+      <if test="totalnum != null" >
+        totalNum = #{totalnum,jdbcType=INTEGER},
+      </if>
+      <if test="totalweight != null" >
+        totalWeight = #{totalweight,jdbcType=REAL},
+      </if>
+      <if test="accessoryprice != null" >
+        accessoryPrice = #{accessoryprice,jdbcType=REAL},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="paytype != null" >
+        payType = #{paytype,jdbcType=CHAR},
+      </if>
+      <if test="ordertime != null" >
+        orderTime = #{ordertime,jdbcType=DATE},
+      </if>
+      <if test="companyid != null" >
+        companyId = #{companyid,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=CHAR},
+      </if>
+    </set>
+    where orderId = #{orderid,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.luyna.pojo.JewelOrder" >
+    update jewelorder
+    set userName = #{username,jdbcType=CHAR},
+      totalNum = #{totalnum,jdbcType=INTEGER},
+      totalWeight = #{totalweight,jdbcType=REAL},
+      accessoryPrice = #{accessoryprice,jdbcType=REAL},
+      status = #{status,jdbcType=CHAR},
+      payType = #{paytype,jdbcType=CHAR},
+      orderTime = #{ordertime,jdbcType=DATE},
+      companyId = #{companyid,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=CHAR}
+    where orderId = #{orderid,jdbcType=CHAR}
+  </update>
+  
+  <select id="selectByUsernameDate" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from jewelorder
+    where userName = #{username,jdbcType=CHAR}
+    and orderTime between #{starttime} and #{endtime}
+    order by orderTime desc 
+  </select>
+  
+  <select id="selectUncheckedOrder" resultMap="BaseResultMap"  >
+    select 
+    <include refid="Base_Column_List" />
+    from jewelorder
+    where status='待审核'
+   	order by orderTime desc 
+  </select>
+  
+  <update id="updateStatusByOrderid" parameterType="java.util.Map" >
+    update jewelorder
+    set status = #{status,jdbcType=CHAR}
+    where orderId = #{orderid,jdbcType=CHAR}
+  </update>
+  
+  <select id="selectCheckedOrder" resultMap="BaseResultMap" parameterType="java.util.Map"  >
+    select 
+    <include refid="Base_Column_List" />
+    from jewelorder
+    where status !='待审核' and orderTime between #{minDate} and  #{maxDate}
+    <if test="username != null and username!=''" >
+        and userName like concat(concat('%',#{username}),'%')
+    </if>
+    <if test="orderStatus != null and orderStatus!=''" >
+        and status = #{orderStatus}
+    </if>
+   	order by orderTime desc,userName asc
+  </select>
+  
+</mapper>

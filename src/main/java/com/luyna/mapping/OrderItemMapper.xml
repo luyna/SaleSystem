@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.luyna.dao.OrderItemMapper" >
+  <resultMap id="BaseResultMap" type="com.luyna.pojo.OrderItem" >
+    <id column="orderId" property="orderid" jdbcType="INTEGER" />
+    <id column="sequence" property="sequence" jdbcType="INTEGER" />
+    <result column="styleNo" property="styleno" jdbcType="CHAR" />
+    <result column="jewelNum" property="jewelnum" jdbcType="INTEGER" />
+    <result column="expectNum" property="expectnum" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <resultMap id="OrderItemDetailMap" type="com.luyna.pojo.OrderItem" >
+    <id column="orderId" property="orderid" jdbcType="INTEGER" />
+    <id column="sequence" property="sequence" jdbcType="INTEGER" />
+    <result column="styleNo" property="styleno" jdbcType="CHAR" />
+    <result column="jewelNum" property="jewelnum" jdbcType="INTEGER" />
+    <result column="expectNum" property="expectnum" jdbcType="INTEGER" />
+    <association property="jewel" javaType="com.luyna.pojo.Jewel">
+			<id column="styleNo" property="styleno" jdbcType="CHAR" />
+			<result column="typeNo" property="typeno" jdbcType="INTEGER" />
+			<result column="jewelName" property="jewelname" jdbcType="CHAR" />
+			<result column="weight" property="weight" jdbcType="REAL" />
+			<result column="fineness" property="fineness" jdbcType="CHAR" />
+			<result column="specification" property="specification"
+				jdbcType="CHAR" />
+			<result column="accessory" property="accessory" jdbcType="CHAR" />
+			<result column="accessoryPrice" property="accessoryprice"
+				jdbcType="REAL" />
+			<result column="suite" property="suite" jdbcType="CHAR" />
+			<result column="storage" property="storage" jdbcType="INTEGER" />
+			<result column="time" property="time" jdbcType="DATE" />
+			<result column="instruction" property="instruction" jdbcType="CHAR" />
+			<result column="remark" property="remark" jdbcType="CHAR" />
+		</association>
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    orderId, sequence, styleNo, jewelNum,expectNum
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.luyna.pojo.OrderItemKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from orderitem
+    where orderId = #{orderid,jdbcType=CHAR}
+      and sequence = #{sequence,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.luyna.pojo.OrderItemKey" >
+    delete from orderitem
+    where orderId = #{orderid,jdbcType=CHAR}
+      and sequence = #{sequence,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.luyna.pojo.OrderItem" >
+    insert into orderitem (orderId, sequence, styleNo, 
+      jewelNum,expectNum)
+    values (#{orderid,jdbcType=CHAR}, #{sequence,jdbcType=INTEGER}, #{styleno,jdbcType=CHAR}, 
+      #{jewelnum,jdbcType=INTEGER},#{expectnum,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.luyna.pojo.OrderItem" >
+    insert into orderitem
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderid != null" >
+        orderId,
+      </if>
+      <if test="sequence != null" >
+        sequence,
+      </if>
+      <if test="styleno != null" >
+        styleNo,
+      </if>
+      <if test="jewelnum != null" >
+        jewelNum,
+      </if>
+      <if test="expectnum != null" >
+        expectNum,
+      </if>
+      
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderid != null" >
+        #{orderid,jdbcType=CHAR},
+      </if>
+      <if test="sequence != null" >
+        #{sequence,jdbcType=INTEGER},
+      </if>
+      <if test="styleno != null" >
+        #{styleno,jdbcType=CHAR},
+      </if>
+      <if test="jewelnum != null" >
+        #{jewelnum,jdbcType=INTEGER},
+      </if>
+      <if test="expectnum != null" >
+        #{expectnum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.luyna.pojo.OrderItem" >
+    update orderitem
+    <set >
+      <if test="styleno != null" >
+        styleNo = #{styleno,jdbcType=CHAR},
+      </if>
+      <if test="jewelnum != null" >
+        jewelNum = #{jewelnum,jdbcType=INTEGER},
+      </if>
+      <if test="expectnum != null" >
+        expectNum=#{expectnum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where orderId = #{orderid,jdbcType=CHAR}
+      and sequence = #{sequence,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.luyna.pojo.OrderItem" >
+    update orderitem
+    set styleNo = #{styleno,jdbcType=CHAR},
+      jewelNum = #{jewelnum,jdbcType=INTEGER},
+      expectNum = #{expectnum,jdbcType=INTEGER},       
+    where orderId = #{orderid,jdbcType=CHAR}
+      and sequence = #{sequence,jdbcType=INTEGER}
+  </update>
+  
+  <!-- <insert id="insertFromShopCart"  >
+    insert into orderitem (orderId, sequence, styleNo, 
+      jewelNum)
+    values (#{orderid,jdbcType=CHAR}, #{sequence,jdbcType=INTEGER}, #{styleno,jdbcType=CHAR}, 
+      #{jewelnum,jdbcType=INTEGER})
+  </insert> -->
+  <select id="selectByOrderId" resultMap="OrderItemDetailMap" parameterType="java.lang.String" >
+    select orderId, sequence, orderitem.styleNo, jewelNum,expectNum, 
+		typeNo, jewelName, weight, fineness, specification, accessory, 
+		accessoryPrice, suite, storage, time, instruction, jewel.remark 
+		from orderitem left join jewel on orderitem.styleno=jewel.styleno
+    	where orderId = #{orderid,jdbcType=CHAR} 
+   
+  </select>
+  
+  <select id="selectByOrderIdKind" resultMap="OrderItemDetailMap" parameterType="java.util.Map" >
+    select orderId, sequence, orderitem.styleNo, jewelNum,expectNum, 
+		typeNo, jewelName, weight, fineness, specification, accessory, 
+		accessoryPrice, suite, storage, time, instruction, jewel.remark 
+		from orderitem left join jewel on orderitem.styleno=jewel.styleno
+    	where orderId = #{orderid,jdbcType=CHAR} 
+    	and typeNo like concat(#{kindid},'%')
+   
+  </select>
+  
+  
+</mapper>

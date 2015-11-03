@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.luyna.dao.JewelSubTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.luyna.pojo.JewelSubType" >
+    <result column="subTypeId" property="subtypeid" jdbcType="CHAR" />
+    <result column="subTypeName" property="subtypename" jdbcType="CHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.luyna.pojo.JewelSubType" >
+    insert into jewelsubtype (subTypeId, subTypeName)
+    values (#{subtypeid,jdbcType=CHAR}, #{subtypename,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.luyna.pojo.JewelSubType" >
+    insert into jewelsubtype
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="subtypeid != null" >
+        subTypeId,
+      </if>
+      <if test="subtypename != null" >
+        subTypeName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="subtypeid != null" >
+        #{subtypeid,jdbcType=CHAR},
+      </if>
+      <if test="subtypename != null" >
+        #{subtypename,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <select id="selectByPrefix" resultMap="BaseResultMap" >
+    select subTypeId, subTypeName
+    from jewelsubtype
+    where subTypeId like concat(#{prefix},'%')
+  </select>
+  
+  <select id="selectMaxId" resultType="java.lang.Integer" parameterType="java.lang.String">
+    select coalesce(max(subTypeId),0)
+    from jewelsubtype
+    where subTypeId like concat(#{prefix},'%')
+  </select>
+  <update id="updateTypename" parameterType="com.luyna.pojo.JewelSubType" >
+    update jewelsubtype
+    set subTypeName =  #{subtypename,jdbcType=CHAR}      
+    where subTypeId =  #{subtypeid,jdbcType=CHAR}
+  </update>
+  <delete id="deleteByTypeid" parameterType="java.lang.String" >
+    delete from jewelsubtype
+    where subTypeId = #{subtypeid,jdbcType=CHAR}
+  </delete>
+  
+</mapper>

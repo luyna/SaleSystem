@@ -1,0 +1,12 @@
+#unitturn{
+	position:fixed;
+	top:100px;
+	right:10px;
+}
+.tit{
+	width:101px;
+	float:right;
+}
+.numlist{
+	width:80px;
+}

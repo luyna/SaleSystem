@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.luyna.dao.BranchCompanyMapper" >
+  <resultMap id="BaseResultMap" type="com.luyna.pojo.BranchCompany" >
+    <id column="companyId" property="companyid" jdbcType="INTEGER" />
+    <result column="userName" property="username" jdbcType="CHAR" />
+    <result column="relationUser" property="relationuser" jdbcType="CHAR" />
+    <result column="address" property="address" jdbcType="CHAR" />
+    <result column="companyName" property="companyname" jdbcType="CHAR" />
+    <result column="phoneNum" property="phonenum" jdbcType="CHAR" />
+    <result column="email" property="email" jdbcType="CHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    companyId, userName, relationUser, address, companyName, phoneNum, email,status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from branchcompany
+    where companyId = #{companyid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByCompanyId" parameterType="java.lang.Integer" >
+ 	 update branchcompany
+   	 set 
+      status = '0'
+    where companyId = #{companyid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.luyna.pojo.BranchCompany" >
+    insert into branchcompany (companyId, userName, relationUser, 
+      address, companyName, phoneNum, 
+      email,status)
+    values (#{companyid,jdbcType=INTEGER}, #{username,jdbcType=CHAR}, #{relationuser,jdbcType=CHAR}, 
+      #{address,jdbcType=CHAR}, #{companyname,jdbcType=CHAR}, #{phonenum,jdbcType=CHAR}, 
+      #{email,jdbcType=CHAR},#{status,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.luyna.pojo.BranchCompany" >
+    insert into branchcompany
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="companyid != null" >
+        companyId,
+      </if>
+      <if test="username != null" >
+        userName,
+      </if>
+      <if test="relationuser != null" >
+        relationUser,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="companyname != null" >
+        companyName,
+      </if>
+      <if test="phonenum != null" >
+        phoneNum,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="companyid != null" >
+        #{companyid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=CHAR},
+      </if>
+      <if test="relationuser != null" >
+        #{relationuser,jdbcType=CHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=CHAR},
+      </if>
+      <if test="companyname != null" >
+        #{companyname,jdbcType=CHAR},
+      </if>
+      <if test="phonenum != null" >
+        #{phonenum,jdbcType=CHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=CHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.luyna.pojo.BranchCompany" >
+    update branchcompany
+    <set >
+      <if test="username != null" >
+        userName = #{username,jdbcType=CHAR},
+      </if>
+      <if test="relationuser != null" >
+        relationUser = #{relationuser,jdbcType=CHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=CHAR},
+      </if>
+      <if test="companyname != null" >
+        companyName = #{companyname,jdbcType=CHAR},
+      </if>
+      <if test="phonenum != null" >
+        phoneNum = #{phonenum,jdbcType=CHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=CHAR},
+      </if>
+      <if test="status != null" >
+        email = #{status,jdbcType=CHAR},
+      </if>
+    </set>
+    where companyId = #{companyid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.luyna.pojo.BranchCompany" >
+    update branchcompany
+    set userName = #{username,jdbcType=CHAR},
+      relationUser = #{relationuser,jdbcType=CHAR},
+      address = #{address,jdbcType=CHAR},
+      companyName = #{companyname,jdbcType=CHAR},
+      phoneNum = #{phonenum,jdbcType=CHAR},
+      email = #{email,jdbcType=CHAR},
+      status = #{status,jdbcType=CHAR}
+    where companyId = #{companyid,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectByUsername" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from branchcompany
+    where userName = #{username,jdbcType=CHAR} 
+    and status='1';
+  </select>
+  
+  <select id="selectByUsernameCompanyid" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from branchcompany
+    where userName = #{username,jdbcType=CHAR}
+    and companyId = #{companyid,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByUsername" parameterType="java.lang.String" >
+ 	 update branchcompany
+   	 set status = '0'
+    where userName = #{username,jdbcType=CHAR}
+  </delete>
+  
+  
+</mapper>
